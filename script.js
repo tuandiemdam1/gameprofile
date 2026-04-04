@@ -228,13 +228,16 @@
   if (url && url.includes('v=')) {
     videoId = url.split('v=')[1].split('&')[0];
   }
-
   if (!videoId) return;
 
-  // Create iframe dynamically but permanently to avoid DOM flicker 
-  // enablejsapi=1 is required to pause/play via postMessage
+  // For YouTube API to work, it MUST have a valid origin. file:// is blocked.
+  const originUrl = (window.location.origin && window.location.origin !== "null") 
+                    ? window.location.origin 
+                    : "https://khuelee.github.io";
+
   const iframe = document.createElement('iframe');
-  iframe.src = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&modestbranding=1&rel=0`;
+  // autoplay=0 (wait for hover), mute=1 (required by browsers for hover autoplay without click)
+  iframe.src = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=0&mute=1&loop=1&playlist=${videoId}&controls=0&modestbranding=1&rel=0&origin=${encodeURIComponent(originUrl)}`;
   iframe.style.position = 'absolute';
   iframe.style.top = '0';
   iframe.style.left = '0';
@@ -251,22 +254,28 @@
   const overlay = wrap.querySelector('.video-play-overlay');
   if (overlay) {
     overlay.style.transition = 'opacity 0.4s ease';
-    overlay.style.zIndex = '10'; // Keep overlay above iframe initially
+    overlay.style.zIndex = '10';
   }
 
   wrap.addEventListener('mouseenter', function () {
-    // Play video via API
     if (iframe.contentWindow) {
-      iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+      iframe.contentWindow.postMessage(JSON.stringify({
+        event: 'command',
+        func: 'playVideo',
+        args: []
+      }), 'https://www.youtube.com');
     }
     iframe.style.opacity = '1';
     if (overlay) overlay.style.opacity = '0';
   });
 
   wrap.addEventListener('mouseleave', function () {
-    // Pause video via API
     if (iframe.contentWindow) {
-      iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+      iframe.contentWindow.postMessage(JSON.stringify({
+        event: 'command',
+        func: 'pauseVideo',
+        args: []
+      }), 'https://www.youtube.com');
     }
     iframe.style.opacity = '0';
     if (overlay) overlay.style.opacity = '1';
