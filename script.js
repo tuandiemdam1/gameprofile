@@ -217,13 +217,58 @@
 })();
 
 /* ----------------------------------------------------------
-   7. YOUTUBE CLICK-TO-OPEN — sorting slide
+   7. YOUTUBE HOVER-TO-PLAY — sorting slide
 ---------------------------------------------------------- */
-(function initVideoClick() {
+(function initVideoHover() {
   const wrap = document.getElementById('sorting-video-wrap');
   if (!wrap) return;
+
   const url = wrap.getAttribute('data-yturl');
-  wrap.addEventListener('click', function () {
-    if (url) window.open(url, '_blank', 'noopener');
+  let videoId = '';
+  if (url && url.includes('v=')) {
+    videoId = url.split('v=')[1].split('&')[0];
+  }
+
+  if (!videoId) return;
+
+  // Create iframe dynamically but permanently to avoid DOM flicker 
+  // enablejsapi=1 is required to pause/play via postMessage
+  const iframe = document.createElement('iframe');
+  iframe.src = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&modestbranding=1&rel=0`;
+  iframe.style.position = 'absolute';
+  iframe.style.top = '0';
+  iframe.style.left = '0';
+  iframe.style.width = '100%';
+  iframe.style.height = '100%';
+  iframe.style.pointerEvents = 'none'; // pass mouse events to parent wrap
+  iframe.style.zIndex = '5';
+  iframe.style.opacity = '0';
+  iframe.style.transition = 'opacity 0.4s ease';
+  iframe.setAttribute('frameborder', '0');
+  iframe.setAttribute('allow', 'autoplay; encrypted-media');
+  wrap.appendChild(iframe);
+
+  const overlay = wrap.querySelector('.video-play-overlay');
+  if (overlay) {
+    overlay.style.transition = 'opacity 0.4s ease';
+    overlay.style.zIndex = '10'; // Keep overlay above iframe initially
+  }
+
+  wrap.addEventListener('mouseenter', function () {
+    // Play video via API
+    if (iframe.contentWindow) {
+      iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+    }
+    iframe.style.opacity = '1';
+    if (overlay) overlay.style.opacity = '0';
+  });
+
+  wrap.addEventListener('mouseleave', function () {
+    // Pause video via API
+    if (iframe.contentWindow) {
+      iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+    }
+    iframe.style.opacity = '0';
+    if (overlay) overlay.style.opacity = '1';
   });
 })();
