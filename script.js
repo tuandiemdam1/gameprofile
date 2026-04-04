@@ -21,30 +21,30 @@
   const ctx = canvas.getContext('2d');
 
   function resize() {
-    canvas.width  = canvas.offsetWidth;
+    canvas.width = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
   }
   resize();
   window.addEventListener('resize', resize);
 
   const PARTICLE_COUNT = 80;
-  const CONNECT_DIST   = 120;
+  const CONNECT_DIST = 120;
   const particles = [];
 
   class Particle {
     constructor() { this.reset(); }
     reset() {
-      this.x  = Math.random() * canvas.width;
-      this.y  = Math.random() * canvas.height;
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
       this.vx = (Math.random() - 0.5) * 0.4;
       this.vy = (Math.random() - 0.5) * 0.4;
-      this.r  = Math.random() * 2 + 1;
+      this.r = Math.random() * 2 + 1;
     }
     update() {
       this.x += this.vx;
       this.y += this.vy;
-      if (this.x < 0 || this.x > canvas.width)  this.vx *= -1;
-      if (this.y < 0 || this.y > canvas.height)  this.vy *= -1;
+      if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+      if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
     }
     draw() {
       ctx.beginPath();
@@ -65,7 +65,7 @@
       for (let j = i + 1; j < particles.length; j++) {
         const dx = particles[i].x - particles[j].x;
         const dy = particles[i].y - particles[j].y;
-        const d  = Math.sqrt(dx * dx + dy * dy);
+        const d = Math.sqrt(dx * dx + dy * dy);
         if (d < CONNECT_DIST) {
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
@@ -199,7 +199,7 @@
 ---------------------------------------------------------- */
 (function initActiveNav() {
   const sections = document.querySelectorAll('section[id]');
-  const links    = document.querySelectorAll('.nav-links a');
+  const links = document.querySelectorAll('.nav-links a');
 
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => {
