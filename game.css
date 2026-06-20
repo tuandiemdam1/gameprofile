@@ -1,0 +1,1443 @@
+/* ============================================================
+   GAME.CSS — Gaming Profile Stylesheet
+   Fonts: Orbitron (headings), Rajdhani (UI), Inter (body)
+   Color Palette:
+     LoL:      #C89B3C (gold), #0BC4E3 (blue), #1E2328 (dark)
+     Valorant: #FF4655 (red), #FFFBF5 (white), #0F1923 (dark)
+     Steam:    #66C0F4 (blue), #1B2838 (dark), #C6D4DF (light)
+============================================================ */
+
+/* ── RESET & BASE ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --lol-gold:    #C89B3C;
+  --lol-gold-lt: #F0E6B2;
+  --lol-blue:    #0BC4E3;
+  --lol-dark:    #010A13;
+  --lol-mid:     #1E2328;
+
+  --val-red:     #FF4655;
+  --val-white:   #FFFBF5;
+  --val-dark:    #0F1923;
+  --val-accent:  #BD3944;
+
+  --steam-blue:  #66C0F4;
+  --steam-dark:  #1B2838;
+  --steam-mid:   #2A475E;
+  --steam-light: #C6D4DF;
+
+  --bg-deep:     #0a0a0f;
+  --text-main:   #e8e8f0;
+  --text-muted:  rgba(232,232,240,0.55);
+
+  --font-heading: 'Orbitron', monospace;
+  --font-ui:      'Rajdhani', sans-serif;
+  --font-body:    'Inter', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-deep);
+  color: var(--text-main);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+
+/* ── PARTICLE CANVAS ──────────────────────────────────────── */
+#particle-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* ── NAVBAR ───────────────────────────────────────────────── */
+.game-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 60px;
+  background: rgba(10,10,15,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: background 0.3s;
+}
+
+.game-nav.scrolled {
+  background: rgba(10,10,15,0.97);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.6);
+}
+
+.nav-back-placeholder {
+  width: 80px;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav-logo { font-size: 1.4rem; }
+.nav-title {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--text-main);
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+.nav-link:hover { color: var(--text-main); }
+.lol-link:hover { color: var(--lol-gold); }
+.val-link:hover { color: var(--val-red); }
+.steam-link:hover { color: var(--steam-blue); }
+
+.nav-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+}
+.dot-lol   { background: var(--lol-gold); box-shadow: 0 0 6px var(--lol-gold); }
+.dot-val   { background: var(--val-red);  box-shadow: 0 0 6px var(--val-red); }
+.dot-steam { background: var(--steam-blue); box-shadow: 0 0 6px var(--steam-blue); }
+
+/* ── HERO SECTION ─────────────────────────────────────────── */
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding-top: 60px;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.personal-avatar-layer {
+  position: absolute;
+  inset: -5%;
+  background: url('assets/gaming_avatar.jpg') center/cover no-repeat;
+  filter: blur(3px) brightness(0.7);
+  opacity: 0.75;
+  animation: hero-bg-pan 30s linear infinite alternate;
+}
+@keyframes hero-bg-pan {
+  0% { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.15) translate(-2%, 2%); }
+}
+
+
+
+/* Dark overlay on hero */
+.hero-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(10,10,15,0.8) 0%,
+    rgba(10,10,15,0.5) 50%,
+    rgba(10,10,15,0.8) 100%
+  );
+  z-index: 1;
+}
+
+/* Floating icons */
+.floating-icons {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.float-icon {
+  position: absolute;
+  border-radius: 12px;
+  opacity: 0.12;
+  filter: blur(1px);
+  animation: float-drift 20s infinite ease-in-out;
+}
+.icon-1 { width: 80px; top: 15%; left: 5%;  animation-delay: 0s;   animation-duration: 18s; }
+.icon-2 { width: 90px; top: 60%; right: 8%; animation-delay: -5s;  animation-duration: 22s; }
+.icon-3 { width: 160px; top: 20%; right: 15%; animation-delay: -10s; animation-duration: 25s; border-radius: 6px; }
+.icon-4 { width: 70px; bottom: 20%; left: 10%; animation-delay: -7s; animation-duration: 20s; }
+.icon-5 { width: 80px; top: 40%; left: 20%;  animation-delay: -3s;  animation-duration: 16s; }
+.steam-logo-img { object-fit: cover; }
+
+@keyframes float-drift {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25%       { transform: translate(20px, -30px) rotate(5deg); }
+  50%       { transform: translate(-15px, 15px) rotate(-3deg); }
+  75%       { transform: translate(10px, 25px) rotate(4deg); }
+}
+
+/* Hero content */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  max-width: 1100px;
+  width: 90%;
+  padding: 2rem 0;
+}
+
+/* Avatar */
+.avatar-wrapper {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+.hero-avatar {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+  z-index: 2;
+  position: relative;
+  filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
+}
+.avatar-ring {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
+}
+.ring-1 {
+  background: linear-gradient(135deg, var(--lol-gold), var(--val-red), var(--steam-blue));
+  z-index: 1;
+  animation: border-glow 3s infinite alternate;
+}
+.ring-2 {
+  top: 4px; left: 4px;
+  width: calc(100% - 8px); height: calc(100% - 8px);
+  background: var(--bg-card);
+  z-index: 1;
+  clip-path: polygon(50% 0%, 94.5% 25%, 94.5% 75%, 50% 100%, 5.5% 75%, 5.5% 25%);
+}
+@keyframes border-glow {
+  0% { opacity: 0.8; transform: scale(1); filter: brightness(1); }
+  100% { opacity: 1; transform: scale(1.02); filter: brightness(1.2); }
+}
+
+.avatar-level-badge {
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #111;
+  border: 2px solid var(--lol-gold);
+  color: var(--lol-gold-lt);
+  padding: 4px 16px;
+  border-radius: 20px;
+  font-family: var(--font-header);
+  font-size: 0.9rem;
+  font-weight: 700;
+  z-index: 5;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.8), 0 0 15px rgba(200,155,60,0.4);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.avatar-status {
+  position: absolute;
+  top: 20px; right: -20px;
+  background: rgba(10,10,15,0.9);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  z-index: 5;
+}
+.avatar-status i { color: #4ade80; font-size: 0.55rem; }
+
+/* Hero info */
+.hero-info { flex: 1; }
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 0.75rem;
+}
+.eyebrow-tag {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--lol-gold);
+  opacity: 0.8;
+}
+.eyebrow-divider { color: rgba(255,255,255,0.2); }
+
+.hero-name {
+  font-family: var(--font-heading);
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+/* Glitch text effect */
+.glitch-text {
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(135deg, var(--lol-gold) 0%, var(--lol-gold-lt) 40%, var(--val-red) 70%, var(--steam-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: glitch-anim 5s infinite;
+}
+.glitch-text::before, .glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  background: inherit;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.glitch-text::before {
+  animation: glitch-before 5s infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+  transform: translate(-2px, -2px);
+  opacity: 0.7;
+}
+.glitch-text::after {
+  animation: glitch-after 5s infinite;
+  clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+  transform: translate(2px, 2px);
+  opacity: 0.7;
+}
+@keyframes glitch-anim {
+  0%, 90%, 100% { transform: translate(0); }
+  91% { transform: translate(-2px, 1px); }
+  93% { transform: translate(2px, -1px); }
+  95% { transform: translate(-1px, 2px); }
+}
+@keyframes glitch-before {
+  0%, 90%, 100% { transform: translate(-2px, -2px); }
+  91% { transform: translate(3px, 0); }
+  93% { transform: translate(-3px, 1px); }
+}
+@keyframes glitch-after {
+  0%, 90%, 100% { transform: translate(2px, 2px); }
+  91% { transform: translate(-3px, 0); }
+  93% { transform: translate(2px, -2px); }
+}
+
+.hero-tagline {
+  font-family: var(--font-ui);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.tag-lol   { color: var(--lol-gold); }
+.tag-val   { color: var(--val-red); }
+.tag-steam { color: var(--steam-blue); }
+.tag-separator { color: rgba(255,255,255,0.3); }
+
+.hero-bio {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  max-width: 480px;
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+}
+
+/* Hero stats */
+.hero-stats {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 1.5rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  backdrop-filter: blur(8px);
+  max-width: 420px;
+}
+.hero-stat { flex: 1; text-align: center; }
+.stat-val {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--lol-gold);
+}
+.stat-lbl {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  margin-top: 2px;
+}
+.stat-divider {
+  width: 1px;
+  height: 36px;
+  background: rgba(255,255,255,0.1);
+}
+
+/* Game pills */
+.hero-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.game-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.55rem 1.2rem;
+  border-radius: 8px;
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid transparent;
+}
+.game-pill:hover { transform: translateY(-2px); }
+.lol-pill {
+  background: rgba(200,155,60,0.12);
+  border-color: rgba(200,155,60,0.4);
+  color: var(--lol-gold);
+}
+.lol-pill:hover { box-shadow: 0 0 20px rgba(200,155,60,0.3); }
+.lol-pill .pill-icon {
+  height: 16px;
+  width: auto;
+  display: inline-block;
+  object-fit: contain;
+}
+
+.val-pill {
+  background: rgba(255,70,85,0.1);
+  border-color: rgba(255,70,85,0.4);
+  color: var(--val-red);
+}
+.val-pill:hover { box-shadow: 0 0 20px rgba(255,70,85,0.3); }
+.val-pill .pill-icon {
+  height: 12px;
+  width: auto;
+  display: inline-block;
+  object-fit: contain;
+}
+
+.steam-pill {
+  background: rgba(102,192,244,0.1);
+  border-color: rgba(102,192,244,0.4);
+  color: var(--steam-blue);
+}
+.steam-pill:hover { box-shadow: 0 0 20px rgba(102,192,244,0.3); }
+
+.fb-pill {
+  background: rgba(24, 119, 242, 0.1);
+  border-color: rgba(24, 119, 242, 0.4);
+  color: #1877F2;
+}
+.fb-pill:hover { box-shadow: 0 0 20px rgba(24, 119, 242, 0.3); }
+
+.discord-pill {
+  background: rgba(88, 101, 242, 0.1);
+  border-color: rgba(88, 101, 242, 0.4);
+  color: #5865F2;
+}
+.discord-pill:hover { box-shadow: 0 0 20px rgba(88, 101, 242, 0.3); }
+.steam-pill:hover { box-shadow: 0 0 20px rgba(102,192,244,0.3); }
+
+/* Scroll hint */
+.scroll-hint {
+  position: absolute;
+  bottom: 30px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+}
+.scroll-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, var(--lol-gold), transparent);
+  animation: scroll-pulse 2s infinite;
+}
+@keyframes scroll-pulse {
+  0%, 100% { opacity: 1; transform: scaleY(1); }
+  50%       { opacity: 0.4; transform: scaleY(0.6); }
+}
+
+/* ── SECTION SHARED ───────────────────────────────────────── */
+.game-section {
+  position: relative;
+  padding: 6rem 0 4rem;
+  overflow: hidden;
+}
+
+.section-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.bg-splash {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.section-container {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.game-logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.game-logo-icon {
+  width: 56px; height: 56px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+.section-eyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+.section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 4vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+.lol-title   { color: var(--lol-gold); text-shadow: 0 0 30px rgba(200,155,60,0.4); }
+.val-title   { color: var(--val-white); text-shadow: 0 0 30px rgba(255,70,85,0.3); }
+.steam-title { color: var(--steam-blue); text-shadow: 0 0 30px rgba(102,192,244,0.3); }
+
+.account-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  font-family: var(--font-ui);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  backdrop-filter: blur(8px);
+}
+.lol-badge {
+  background: rgba(200,155,60,0.1);
+  border: 1px solid rgba(200,155,60,0.35);
+  color: var(--lol-gold-lt);
+}
+.val-badge {
+  background: rgba(255,70,85,0.1);
+  border: 1px solid rgba(255,70,85,0.35);
+  color: #ff8693;
+}
+.steam-badge {
+  background: rgba(102,192,244,0.1);
+  border: 1px solid rgba(102,192,244,0.35);
+  color: var(--steam-blue);
+}
+.badge-server {
+  font-size: 0.72rem;
+  opacity: 0.6;
+}
+
+/* Panel title */
+.panel-title {
+  font-family: var(--font-ui);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 1.2rem;
+  color: var(--text-main);
+  text-transform: uppercase;
+}
+
+/* Mastery row */
+.mastery-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(200,155,60,0.05);
+  border: 1px solid rgba(200,155,60,0.12);
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+}
+.mastery-label {
+  color: var(--lol-gold);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+.mastery-champ {
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.04);
+  border-radius: 4px;
+  padding: 2px 8px;
+}
+.mastery-champ em {
+  color: var(--lol-gold-lt);
+  font-style: normal;
+  margin-left: 4px;
+  font-weight: 600;
+}
+
+/* ── LEAGUE OF LEGENDS ────────────────────────────────────── */
+.lol-section {
+  background: var(--lol-dark);
+}
+
+.lol-overlay {
+  background: linear-gradient(
+    to right,
+    rgba(1,10,19,0.98) 0%,
+    rgba(1,10,19,0.82) 40%,
+    rgba(1,10,19,0.65) 70%,
+    rgba(1,10,19,0.8) 100%
+  );
+}
+
+.lol-main-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+/* Rank Card */
+.rank-card {
+  border-radius: 16px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  backdrop-filter: blur(12px);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.rank-card:hover { transform: translateY(-4px); }
+
+.lol-rank-card {
+  background: rgba(1,10,19,0.7);
+  border: 1px solid rgba(200,155,60,0.25);
+  box-shadow: 0 0 40px rgba(200,155,60,0.08), inset 0 1px 0 rgba(200,155,60,0.15);
+}
+.lol-rank-card:hover {
+  box-shadow: 0 8px 50px rgba(200,155,60,0.2);
+}
+
+.rank-emblem { text-align: center; }
+.rank-emblem-img {
+  width: 140px; height: 140px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 20px rgba(200,155,60,0.5));
+  animation: emblem-float 4s ease-in-out infinite;
+}
+@keyframes emblem-float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+.rank-info { text-align: center; }
+.rank-tier {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+.lol-color { color: var(--lol-gold); }
+.val-color { color: var(--val-red); }
+
+.rank-division {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--text-main);
+  line-height: 1;
+}
+.rank-lp {
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  color: var(--lol-gold-lt);
+  margin-top: 4px;
+}
+.rank-queue {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  margin-top: 4px;
+}
+
+.rank-stats-mini {
+  display: flex;
+  gap: 1.5rem;
+  border-top: 1px solid rgba(200,155,60,0.15);
+  padding-top: 1rem;
+  width: 100%;
+  justify-content: center;
+}
+.mini-stat { text-align: center; }
+.mini-val {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--lol-gold);
+  display: block;
+}
+.mini-lbl {
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+}
+
+/* Champions panel */
+.champions-panel {
+  background: rgba(1,10,19,0.65);
+  border: 1px solid rgba(200,155,60,0.12);
+  border-radius: 16px;
+  padding: 1.5rem;
+  backdrop-filter: blur(12px);
+}
+
+.champ-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.champ-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(200,155,60,0.08);
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  cursor: default;
+}
+.champ-card:hover {
+  background: rgba(200,155,60,0.08);
+  border-color: rgba(200,155,60,0.3);
+  transform: translateX(4px);
+}
+
+.champ-img-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+.champ-img {
+  width: 56px; height: 56px;
+  border-radius: 8px;
+  border: 2px solid rgba(200,155,60,0.3);
+  object-fit: cover;
+}
+.champ-rank-badge {
+  position: absolute;
+  top: -6px; left: -6px;
+  width: 20px; height: 20px;
+  background: var(--lol-gold);
+  color: var(--lol-dark);
+  border-radius: 50%;
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.champ-details { flex: 1; }
+.champ-name {
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: 0.04em;
+}
+.champ-role {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  color: var(--lol-gold);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.champ-stats-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 5px;
+}
+.champ-stats-row strong { color: var(--lol-gold-lt); }
+.champ-progress-bar {
+  height: 4px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.champ-progress-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 1s ease;
+}
+
+/* Featured splash */
+.featured-splash {
+  margin-top: 1rem;
+}
+.splash-selector {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+.splash-btn {
+  padding: 0.4rem 1rem;
+  background: rgba(200,155,60,0.08);
+  border: 1px solid rgba(200,155,60,0.2);
+  border-radius: 6px;
+  color: var(--text-muted);
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.splash-btn:hover, .splash-btn.active {
+  background: rgba(200,155,60,0.18);
+  border-color: var(--lol-gold);
+  color: var(--lol-gold);
+}
+
+.splash-display {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(200,155,60,0.2);
+  max-height: 340px;
+}
+.splash-img {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  object-position: top;
+  transition: opacity 0.4s, transform 6s ease;
+}
+.splash-img:hover { transform: scale(1.03); }
+.splash-caption {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(to top, rgba(1,10,19,0.9) 0%, transparent 100%);
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--lol-gold-lt);
+  letter-spacing: 0.08em;
+}
+
+/* ── VALORANT SECTION ─────────────────────────────────────── */
+.valorant-section {
+  background: var(--val-dark);
+}
+.val-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(15,25,35,0.97) 0%,
+    rgba(15,25,35,0.75) 50%,
+    rgba(15,25,35,0.92) 100%
+  );
+}
+
+/* Geometric decorations */
+.val-geo-1, .val-geo-2 {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+}
+.val-geo-1 {
+  top: 0; right: 0;
+  width: 300px; height: 300px;
+  background: var(--val-red);
+  clip-path: polygon(100% 0, 0 0, 100% 100%);
+  opacity: 0.04;
+}
+.val-geo-2 {
+  bottom: 0; left: 0;
+  width: 200px; height: 200px;
+  background: var(--val-red);
+  clip-path: polygon(0 100%, 100% 100%, 0 0);
+  opacity: 0.03;
+}
+
+/* Valorant logo */
+.val-logo-box {
+  width: 56px; height: 56px;
+  background: rgba(255,70,85,0.1);
+  border: 1px solid rgba(255,70,85,0.3);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Valorant rank card */
+.val-main-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.val-rank-card {
+  background: rgba(15,25,35,0.8);
+  border: 1px solid rgba(255,70,85,0.2);
+  box-shadow: 0 0 40px rgba(255,70,85,0.05);
+}
+.val-rank-card:hover {
+  box-shadow: 0 8px 50px rgba(255,70,85,0.15);
+}
+
+.val-rank-emblem {
+  text-align: center;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255,70,85,0.15);
+  width: 100%;
+}
+.val-rank-emblem .rank-emblem-img {
+  filter: drop-shadow(0 0 20px rgba(255,70,85,0.4));
+  width: 100px; height: 100px;
+}
+
+.val-rank-stats { width: 100%; }
+.val-stat-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+}
+.val-stat-row:last-child { border-bottom: none; }
+.val-stat-row i { color: var(--val-red); width: 16px; }
+.val-stat-row span { flex: 1; color: var(--text-muted); }
+.val-stat-row strong { color: var(--val-white); }
+
+/* Agents panel */
+.agents-panel {
+  background: rgba(15,25,35,0.75);
+  border: 1px solid rgba(255,70,85,0.1);
+  border-radius: 16px;
+  padding: 1.5rem;
+  backdrop-filter: blur(12px);
+}
+
+.agents-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.agent-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,70,85,0.08);
+  border-radius: 12px;
+  padding: 0.8rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.agent-card:hover, .agent-card.active {
+  background: rgba(255,70,85,0.1);
+  border-color: rgba(255,70,85,0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(255,70,85,0.2);
+}
+.agent-img-wrap {
+  position: relative;
+  margin-bottom: 8px;
+}
+.agent-img {
+  width: 70px; height: 70px;
+  border-radius: 10px;
+  margin: 0 auto;
+  object-fit: contain;
+  background: rgba(255,70,85,0.08);
+  padding: 5px;
+}
+.agent-role-tag {
+  position: absolute;
+  bottom: -4px; left: 50%;
+  transform: translateX(-50%);
+  background: var(--val-red);
+  color: white;
+  font-family: var(--font-ui);
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 1px 6px;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+.agent-name {
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-top: 4px;
+  letter-spacing: 0.04em;
+}
+.agent-stats {
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 5px;
+}
+
+/* Agent full art */
+.agent-fullart-display {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+.agent-art-select {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.agent-art-btn {
+  padding: 0.5rem 1.2rem;
+  background: rgba(255,70,85,0.06);
+  border: 1px solid rgba(255,70,85,0.2);
+  border-radius: 6px;
+  color: var(--text-muted);
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+.agent-art-btn:hover, .agent-art-btn.active {
+  background: rgba(255,70,85,0.15);
+  border-color: var(--val-red);
+  color: #ff8693;
+}
+
+.agent-art-frame {
+  position: relative;
+  flex: 1;
+  max-height: 400px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(15,25,35,0.8);
+  border: 1px solid rgba(255,70,85,0.15);
+}
+.agent-full-img {
+  width: 100%;
+  height: 400px;
+  object-fit: contain;
+  object-position: top;
+  transition: opacity 0.4s;
+  filter: drop-shadow(0 0 30px rgba(255,70,85,0.2));
+}
+.agent-art-caption {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(to top, rgba(15,25,35,0.9) 0%, transparent 100%);
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #ff8693;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Valorant corner decorations */
+.val-corner {
+  position: absolute;
+  width: 20px; height: 20px;
+  border-color: var(--val-red);
+  border-style: solid;
+  opacity: 0.6;
+}
+.val-corner-tl { top: 8px; left: 8px;  border-width: 2px 0 0 2px; }
+.val-corner-tr { top: 8px; right: 8px; border-width: 2px 2px 0 0; }
+.val-corner-bl { bottom: 8px; left: 8px;  border-width: 0 0 2px 2px; }
+.val-corner-br { bottom: 8px; right: 8px; border-width: 0 2px 2px 0; }
+
+/* ── STEAM SECTION ────────────────────────────────────────── */
+.steam-section {
+  background: var(--steam-dark);
+}
+
+.steam-grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(102,192,244,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(102,192,244,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.steam-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(27,40,56,0.9) 0%,
+    rgba(27,40,56,0.7) 50%,
+    rgba(27,40,56,0.88) 100%
+  );
+}
+.steam-logo-box {
+  width: 56px; height: 56px;
+  background: rgba(102,192,244,0.08);
+  border: 1px solid rgba(102,192,244,0.25);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Steam stats bar */
+.steam-stats-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(102,192,244,0.08);
+  border: 1px solid rgba(102,192,244,0.15);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 3rem;
+}
+.steam-stat-block {
+  background: rgba(27,40,56,0.85);
+  padding: 1.5rem;
+  text-align: center;
+  transition: background 0.2s;
+}
+.steam-stat-block:hover { background: rgba(42,71,94,0.9); }
+.steam-stat-icon {
+  font-size: 1.4rem;
+  color: var(--steam-blue);
+  margin-bottom: 8px;
+}
+.steam-stat-number {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--steam-blue);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.steam-stat-label {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+}
+
+/* Games grid */
+.games-grid-wrapper { position: relative; }
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  margin-top: 1rem;
+}
+
+.game-card {
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(27,40,56,0.9);
+  border: 1px solid rgba(102,192,244,0.1);
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+.game-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+  border-color: rgba(102,192,244,0.35);
+}
+
+.game-card-img-wrap {
+  position: relative;
+  overflow: hidden;
+  height: 130px;
+}
+.game-card-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+.game-card:hover .game-card-img { transform: scale(1.06); }
+
+.game-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(27,40,56,0.7) 0%, transparent 60%);
+}
+.game-play-tag {
+  position: absolute;
+  top: 8px; right: 8px;
+  background: rgba(102,192,244,0.2);
+  border: 1px solid rgba(102,192,244,0.4);
+  color: var(--steam-blue);
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.game-card-info { padding: 1rem; }
+.game-card-name {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--steam-light);
+  margin-bottom: 6px;
+  letter-spacing: 0.03em;
+}
+.game-card-hours {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 4px;
+}
+.game-card-hours i { color: var(--steam-blue); }
+
+.game-card-genre {
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  color: rgba(198,212,223,0.5);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 6px;
+  letter-spacing: 0.04em;
+}
+.game-card-genre i { color: rgba(102,192,244,0.4); font-size: 0.6rem; }
+
+/* Badge variants */
+.coop-tag {
+  background: rgba(255,100,180,0.15) !important;
+  border-color: rgba(255,100,180,0.45) !important;
+  color: #ff80c8 !important;
+}
+.hot-tag {
+  background: rgba(255,160,0,0.15) !important;
+  border-color: rgba(255,160,0,0.45) !important;
+  color: #FFB340 !important;
+}
+
+.game-hours-bar {
+  height: 3px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.game-hours-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--steam-mid), var(--steam-blue));
+  border-radius: 2px;
+  transition: width 1.2s ease;
+}
+
+/* ── DIVIDERS ─────────────────────────────────────────────── */
+.section-divider {
+  position: relative;
+  z-index: 3;
+  line-height: 0;
+  margin-top: -2px;
+}
+.lol-to-val svg path { fill: var(--val-dark); }
+.val-to-steam svg path { fill: var(--steam-dark); }
+.section-divider svg { width: 100%; height: 80px; }
+
+/* ── FOOTER ───────────────────────────────────────────────── */
+.game-footer {
+  background: var(--bg-deep);
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding: 2.5rem;
+  text-align: center;
+}
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+.footer-logo { font-size: 1.4rem; }
+.footer-note {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+.footer-copy {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  color: rgba(232,232,240,0.3);
+  letter-spacing: 0.05em;
+}
+.footer-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.6rem 1.5rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: all 0.2s;
+  letter-spacing: 0.05em;
+}
+.footer-back-btn:hover {
+  background: rgba(255,255,255,0.09);
+  color: var(--text-main);
+  border-color: rgba(255,255,255,0.2);
+}
+
+/* ── REVEAL ANIMATION ─────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── RESPONSIVE ───────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+  }
+  .hero-bio, .hero-stats { max-width: 100%; }
+  .hero-tagline, .hero-links { justify-content: center; }
+
+  .lol-main-grid,
+  .val-main-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .agents-grid { grid-template-columns: repeat(2, 1fr); }
+  .games-grid  { grid-template-columns: repeat(2, 1fr); }
+
+  .steam-stats-bar { grid-template-columns: repeat(2, 1fr); }
+
+  .agent-fullart-display { flex-direction: column; }
+  .agent-art-select { flex-direction: row; }
+
+  .nav-links { display: none; }
+}
+
+@media (max-width: 600px) {
+  .games-grid  { grid-template-columns: 1fr; }
+  .agents-grid { grid-template-columns: repeat(2, 1fr); }
+  .steam-stats-bar { grid-template-columns: 1fr 1fr; }
+}

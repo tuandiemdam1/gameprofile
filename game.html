@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gaming Profile · Tuấn</title>
+  <meta name="description" content="Gaming profile của Tuấn — League of Legends, Valorant, Steam. Tài khoản, rank, main champion và thông tin game cá nhân." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="game.css" />
+</head>
+
+<body>
+
+  <!-- ============================================================
+       PARTICLE CANVAS (chạy suốt trang)
+  ============================================================= -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- ============================================================
+       NAVBAR
+  ============================================================= -->
+  <nav class="game-nav" id="game-nav">
+    <div class="nav-back-placeholder"></div>
+    <div class="nav-brand">
+      <span class="nav-logo">⚔</span>
+      <span class="nav-title">GAMING PROFILE</span>
+    </div>
+    <div class="nav-links">
+      <a href="#lol-section" class="nav-link lol-link">
+        <span class="nav-dot dot-lol"></span>LoL
+      </a>
+      <a href="#valorant-section" class="nav-link val-link">
+        <span class="nav-dot dot-val"></span>VALORANT
+      </a>
+      <a href="#steam-section" class="nav-link steam-link">
+        <span class="nav-dot dot-steam"></span>Steam
+      </a>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       HERO SECTION
+  ============================================================= -->
+  <section class="hero-section" id="hero">
+    <!-- Animated background layers -->
+    <div class="hero-bg">
+      <div class="personal-avatar-layer"></div>
+    </div>
+
+    <!-- Floating game icons -->
+    <div class="floating-icons">
+      <img src="https://ddragon.leagueoflegends.com/cdn/15.1.1/img/champion/Jinx.png" class="float-icon icon-1" alt="LoL champion" />
+      <img src="https://media.valorant-api.com/agents/add6443a-41bd-e414-f6ad-e58d267f4e95/displayicon.png" class="float-icon icon-2" alt="Jett Valorant" />
+      <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/730/capsule_184x69.jpg" class="float-icon icon-3 steam-logo-img" alt="Steam Game" />
+      <img src="https://ddragon.leagueoflegends.com/cdn/15.1.1/img/champion/Ahri.png" class="float-icon icon-4" alt="Ahri" />
+      <img src="https://media.valorant-api.com/agents/7f94d92c-4234-0a36-9646-3a87eb8b5c89/displayicon.png" class="float-icon icon-5" alt="Yoru" />
+    </div>
+
+    <div class="hero-content">
+      <!-- Avatar -->
+      <div class="avatar-wrapper">
+        <div class="avatar-ring ring-1"></div>
+        <div class="avatar-ring ring-2"></div>
+        <img src="assets/gaming_avatar.jpg" alt="Gaming Avatar" class="hero-avatar" id="hero-avatar" onerror="this.src='https://ddragon.leagueoflegends.com/cdn/15.1.1/img/champion/Yasuo.png'" />
+        <div class="avatar-level-badge">Lv. 692</div>
+        <div class="avatar-status">
+          <i class="fa-solid fa-circle"></i> Online
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="hero-info">
+        <div class="hero-eyebrow">
+          <span class="eyebrow-tag">GAMING PROFILE</span>
+          <span class="eyebrow-divider">|</span>
+          <span class="eyebrow-tag">2024</span>
+        </div>
+        <h1 class="hero-name">
+          <span class="name-main glitch-text" data-text="TVT">TVT</span>
+        </h1>
+        <p class="hero-tagline">
+          <span class="tag-lol">ARAM</span>
+          <span class="tag-separator">·</span>
+          <span class="tag-val">Flex role</span>
+          <span class="tag-separator">·</span>
+          <span class="tag-steam">PC Gamer</span>
+        </p>
+        <p class="hero-bio">
+          ARAM main trên LoL, Flex role trên Valorant. Đối thủ lớn nhất là bạn bè của tôi.
+        </p>
+
+        <!-- Stats row -->
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="stat-val" id="stat-lol-rank">Silver I</div>
+            <div class="stat-lbl">LoL Flex</div>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="hero-stat">
+            <div class="stat-val" id="stat-val-rank">Gold II</div>
+            <div class="stat-lbl">Valorant</div>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="hero-stat">
+            <div class="stat-val" id="stat-lol-lvl">Lv.692</div>
+            <div class="stat-lbl">LoL Level</div>
+          </div>
+        </div>
+
+        <!-- Game & Social links -->
+        <div class="hero-links">
+          <a href="#lol-section" class="game-pill lol-pill">
+            <img src="assets/lol_logo.png" alt="LoL" class="pill-icon" />
+            League of Legends
+          </a>
+          <a href="#valorant-section" class="game-pill val-pill">
+            <img src="assets/val_logo.png" alt="VALORANT" class="pill-icon" />
+            VALORANT
+          </a>
+          <a href="#steam-section" class="game-pill steam-pill">
+            <i class="fa-brands fa-steam"></i>
+            Steam
+          </a>
+          <a href="https://www.facebook.com/tran.tuan.206299" class="game-pill fb-pill" target="_blank">
+            <i class="fa-brands fa-facebook-f"></i>
+            Facebook
+          </a>
+          <a href="javascript:void(0)" onclick="navigator.clipboard.writeText('tvt1610'); alert('Đã copy tên Discord: tvt1610!');" class="game-pill discord-pill" title="Click để copy">
+            <i class="fa-brands fa-discord"></i>
+            tvt1610
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll hint -->
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      <span>SCROLL</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       LEAGUE OF LEGENDS SECTION
+  ============================================================= -->
+  <section class="game-section lol-section" id="lol-section">
+    <!-- Background image from LoL splash art -->
+    <div class="section-bg lol-bg">
+      <img src="assets/lol_bg.jpg" alt="LoL Background" class="bg-splash" />
+      <div class="bg-overlay lol-overlay"></div>
+    </div>
+
+    <div class="section-container">
+      <!-- Section Header -->
+      <div class="section-header reveal">
+        <div class="game-logo-wrap">
+          <img src="assets/lol_logo.png" alt="League of Legends" class="game-logo-icon" style="height:64px; width:auto; filter: drop-shadow(0 0 10px rgba(200,155,60,0.4)); object-fit: contain;" />
+          <div>
+            <div class="section-eyebrow">RIOT GAMES</div>
+            <h2 class="section-title lol-title">League of Legends</h2>
+          </div>
+        </div>
+        <div class="account-badge lol-badge">
+          <i class="fa-solid fa-user-shield"></i>
+          <span id="lol-account-name">LấyĐứcPhụcNhân</span>
+          <span class="badge-server">#TVT</span>
+        </div>
+      </div>
+
+      <!-- Rank Card + Stats -->
+      <div class="lol-main-grid">
+        <!-- Rank Card -->
+        <div class="rank-card lol-rank-card reveal">
+          <div class="rank-emblem">
+            <img src="https://opgg-static.akamaized.net/images/medals_new/silver.png"
+              alt="Silver Rank" class="rank-emblem-img" id="lol-rank-img"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" />
+            <div class="rank-fallback" style="display:none">
+              <i class="fa-solid fa-shield" style="font-size:4rem;color:#C0C0C0"></i>
+            </div>
+          </div>
+          <div class="rank-info">
+            <div class="rank-tier lol-color" id="lol-rank-tier">SILVER</div>
+            <div class="rank-division" id="lol-rank-div">I</div>
+            <div class="rank-lp" id="lol-rank-lp">11 LP · Peak: S1 52 LP</div>
+            <div class="rank-queue">Ranked Flex · S2025: Gold 3</div>
+          </div>
+          <div class="rank-stats-mini">
+            <div class="mini-stat">
+              <span class="mini-val" id="lol-wr">25%</span>
+              <span class="mini-lbl">Win Rate</span>
+            </div>
+            <div class="mini-stat">
+              <span class="mini-val" id="lol-games">12</span>
+              <span class="mini-lbl">Games</span>
+            </div>
+            <div class="mini-stat">
+              <span class="mini-val" id="lol-kda">2.21</span>
+              <span class="mini-lbl">KDA</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Champions -->
+        <div class="champions-panel reveal">
+          <h3 class="panel-title">
+            <i class="fa-solid fa-star" style="color:#C89B3C"></i>
+            Main Champions
+          </h3>
+          <!-- Mastery badge row -->
+          <div class="mastery-row">
+            <span class="mastery-label">🏆 Top Mastery:</span>
+            <span class="mastery-champ">Yasuo <em>312K pts</em></span>
+            <span class="mastery-champ">Lee Sin <em>142K pts</em></span>
+            <span class="mastery-champ">Ezreal <em>114K pts</em></span>
+            <span class="mastery-champ">Zed <em>102K pts</em></span>
+          </div>
+          <div class="champ-list" id="lol-champ-list">
+            <!-- Champion 1 - Yasuo (highest mastery) -->
+            <div class="champ-card" data-champ="Yasuo">
+              <div class="champ-img-wrap">
+                <img src="https://ddragon.leagueoflegends.com/cdn/15.1.1/img/champion/Yasuo.png" alt="Yasuo" class="champ-img" />
+                <div class="champ-rank-badge">1</div>
+              </div>
+              <div class="champ-details">
+                <div class="champ-name">Yasuo</div>
+                <div class="champ-role"><i class="fa-solid fa-wind"></i> Fighter · 312K Mastery</div>
+                <div class="champ-stats-row">
+                  <span class="champ-wr">KDA: <strong>4.77</strong></span>
+                  <span class="champ-games">Most Mastery</span>
+                </div>
+                <div class="champ-progress-bar">
+                  <div class="champ-progress-fill" style="width:100%;background:linear-gradient(90deg,#C89B3C,#F0E6B2)"></div>
+                </div>
+              </div>
+            </div>
+            <!-- Champion 2 - Lee Sin -->
+            <div class="champ-card" data-champ="LeeSin">
+              <div class="champ-img-wrap">
+                <img src="https://ddragon.leagueoflegends.com/cdn/15.1.1/img/champion/LeeSin.png" alt="Lee Sin" class="champ-img" />
+                <div class="champ-rank-badge">2</div>
+              </div>
+              <div class="champ-details">
+                <div class="champ-name">Lee Sin</div>
+                <div class="champ-role"><i class="fa-solid fa-khanda"></i> Jungle · 142K Mastery</div>
+                <div class="champ-stats-row">
+                  <span class="champ-wr">KDA: <strong>2.21</strong></span>
+                  <span class="champ-games">Jungle Main</span>
+                </div>
+                <div class="champ-progress-bar">
+                  <div class="champ-progress-fill" style="width:45%;background:linear-gradient(90deg,#C89B3C,#F0E6B2)"></div>
+                </div>
+              </div>
+            </div>
+            <!-- Champion 3 - Jarvan IV (S2026 most played) -->
+            <div class="champ-card" data-champ="JarvanIV">
+              <div class="champ-img-wrap">
+                <img src="https://ddragon.leagueoflegends.com/cdn/15.1.1/img/champion/JarvanIV.png" alt="Jarvan IV" class="champ-img" />
+                <div class="champ-rank-badge">3</div>
+              </div>
+              <div class="champ-details">
+                <div class="champ-name">Jarvan IV</div>
+                <div class="champ-role"><i class="fa-solid fa-shield"></i> Jungle · S2026</div>
+                <div class="champ-stats-row">
+                  <span class="champ-wr">WR: <strong>50%</strong></span>
+                  <span class="champ-games">KDA 4.77</span>
+                </div>
+                <div class="champ-progress-bar">
+                  <div class="champ-progress-fill" style="width:50%;background:linear-gradient(90deg,#C89B3C,#F0E6B2)"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Featured Splash -->
+      <div class="featured-splash reveal">
+        <div class="splash-selector">
+          <button class="splash-btn active" data-splash="assets/yasuo_spirit.jpg" data-name="Yasuo">Yasuo</button>
+          <button class="splash-btn" data-splash="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/LeeSin_0.jpg" data-name="LeeSin">Lee Sin</button>
+          <button class="splash-btn" data-splash="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/JarvanIV_0.jpg" data-name="JarvanIV">Jarvan IV</button>
+        </div>
+        <div class="splash-display">
+          <img src="assets/yasuo_spirit.jpg" alt="Yasuo splash" class="splash-img" id="featured-splash" />
+          <div class="splash-caption" id="splash-caption">Yasuo — The Unforgiven · 312,482 Mastery</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="section-divider lol-to-val">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#0a0a0f" />
+    </svg>
+  </div>
+
+  <!-- ============================================================
+       VALORANT SECTION
+  ============================================================= -->
+  <section class="game-section valorant-section" id="valorant-section">
+    <!-- Background -->
+    <div class="section-bg val-bg">
+      <img src="assets/val_bg.png" alt="Valorant Background" class="bg-splash" id="val-map-bg" />
+      <div class="bg-overlay val-overlay"></div>
+      <!-- Geometric overlays -->
+      <div class="val-geo-1"></div>
+      <div class="val-geo-2"></div>
+    </div>
+
+    <div class="section-container">
+      <!-- Section Header -->
+      <div class="section-header reveal">
+        <div class="game-logo-wrap">
+          <div class="val-logo-box">
+            <img src="assets/val_logo.png" alt="Valorant" style="height:48px; width:auto; object-fit: contain;" />
+          </div>
+          <div>
+            <div class="section-eyebrow">RIOT GAMES</div>
+            <h2 class="section-title val-title">VALORANT</h2>
+          </div>
+        </div>
+        <div class="account-badge val-badge">
+          <i class="fa-solid fa-crosshairs"></i>
+          <span id="val-account-name">LấyĐứcPhụcNhân</span>
+          <span class="badge-server">#TVT</span>
+        </div>
+      </div>
+
+      <!-- Rank + Agents Grid -->
+      <div class="val-main-grid">
+        <!-- Rank Card -->
+        <div class="rank-card val-rank-card reveal">
+          <div class="val-rank-emblem">
+            <img src="https://media.valorant-api.com/competitivetiers/03621f52-342b-cf4e-4f86-9350a49c6d04/13/largeicon.png"
+              alt="Gold 2" class="rank-emblem-img"
+              onerror="this.style.display='none'" />
+            <div class="rank-tier val-color" id="val-rank-tier">GOLD</div>
+            <div class="rank-division" id="val-rank-div">2</div>
+          </div>
+          <div class="val-rank-stats">
+            <div class="val-stat-row">
+              <i class="fa-solid fa-crosshairs"></i>
+              <span>Win Rate</span>
+              <strong id="val-wr">44%</strong>
+            </div>
+            <div class="val-stat-row">
+              <i class="fa-solid fa-skull"></i>
+              <span>K/D Ratio</span>
+              <strong id="val-kd">1.20</strong>
+            </div>
+            <div class="val-stat-row">
+              <i class="fa-solid fa-bullseye"></i>
+              <span>Headshot %</span>
+              <strong id="val-hs">26.2%</strong>
+            </div>
+            <div class="val-stat-row">
+              <i class="fa-solid fa-gamepad"></i>
+              <span>Matches</span>
+              <strong id="val-matches">50</strong>
+            </div>
+            <div class="val-stat-row">
+              <i class="fa-solid fa-chart-line"></i>
+              <span>ACS</span>
+              <strong>231.5</strong>
+            </div>
+            <div class="val-stat-row">
+              <i class="fa-solid fa-fire"></i>
+              <span>ADR</span>
+              <strong>153.5</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Agents Panel -->
+        <div class="agents-panel reveal">
+          <h3 class="panel-title">
+            <i class="fa-solid fa-user-ninja" style="color:#FF4655"></i>
+            Main Agents
+          </h3>
+          <div class="agents-grid" id="val-agents-grid">
+            <!-- Brimstone — #1 most played 70% WR -->
+            <div class="agent-card active" data-agent="Brimstone">
+              <div class="agent-img-wrap">
+                <img src="https://media.valorant-api.com/agents/9f0d8ba9-4140-b941-57d3-a7ad57c6b417/displayicon.png" alt="Brimstone" class="agent-img" />
+                <div class="agent-role-tag">CONTROLLER</div>
+              </div>
+              <div class="agent-name">Brimstone</div>
+              <div class="agent-stats">
+                <span>WR: <strong>70%</strong></span>
+                <span>10 matches</span>
+              </div>
+            </div>
+            <!-- Fade — #2 55.6% WR -->
+            <div class="agent-card" data-agent="Fade">
+              <div class="agent-img-wrap">
+                <img src="https://media.valorant-api.com/agents/dade69b4-4f5a-8528-247b-219e5a1facd6/displayicon.png" alt="Fade" class="agent-img" />
+                <div class="agent-role-tag">INITIATOR</div>
+              </div>
+              <div class="agent-name">Fade</div>
+              <div class="agent-stats">
+                <span>WR: <strong>55.6%</strong></span>
+                <span>9 matches</span>
+              </div>
+            </div>
+            <!-- Omen — #3 -->
+            <div class="agent-card" data-agent="Omen">
+              <div class="agent-img-wrap">
+                <img src="https://media.valorant-api.com/agents/8e253930-4c05-31dd-1b6c-968525494517/displayicon.png" alt="Omen" class="agent-img" />
+                <div class="agent-role-tag">CONTROLLER</div>
+              </div>
+              <div class="agent-name">Omen</div>
+              <div class="agent-stats">
+                <span>WR: <strong>44.4%</strong></span>
+                <span>9 matches</span>
+              </div>
+            </div>
+            <!-- Reyna — 1.56 K/D best -->
+            <div class="agent-card" data-agent="Reyna">
+              <div class="agent-img-wrap">
+                <img src="https://media.valorant-api.com/agents/a3bfb853-43b2-7238-a4f1-ad90e9e46bcc/displayicon.png" alt="Reyna" class="agent-img" />
+                <div class="agent-role-tag">DUELIST</div>
+              </div>
+              <div class="agent-name">Reyna</div>
+              <div class="agent-stats">
+                <span>WR: <strong>50%</strong></span>
+                <span>4 matches</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Agent Full Art -->
+      <div class="agent-fullart-display reveal">
+        <div class="agent-art-select">
+          <button class="agent-art-btn active" data-img="https://media.valorant-api.com/agents/9f0d8ba9-4140-b941-57d3-a7ad57c6b417/fullportrait.png" data-name="Brimstone — Controller">Brimstone</button>
+          <button class="agent-art-btn" data-img="https://media.valorant-api.com/agents/dade69b4-4f5a-8528-247b-219e5a1facd6/fullportrait.png" data-name="Fade — Initiator">Fade</button>
+          <button class="agent-art-btn" data-img="https://media.valorant-api.com/agents/8e253930-4c05-31dd-1b6c-968525494517/fullportrait.png" data-name="Omen — Controller">Omen</button>
+        </div>
+        <div class="agent-art-frame">
+          <img src="https://media.valorant-api.com/agents/9f0d8ba9-4140-b941-57d3-a7ad57c6b417/fullportrait.png"
+            alt="Brimstone" class="agent-full-img" id="agent-full-img" />
+          <div class="agent-art-caption" id="agent-art-caption">Brimstone — Controller · 70% WR · 10 Matches</div>
+          <div class="val-corner val-corner-tl"></div>
+          <div class="val-corner val-corner-tr"></div>
+          <div class="val-corner val-corner-bl"></div>
+          <div class="val-corner val-corner-br"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="section-divider val-to-steam">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,40 C360,0 1080,80 1440,40 L1440,80 L0,80 Z" fill="#0a0a0f" />
+    </svg>
+  </div>
+
+  <!-- ============================================================
+       STEAM SECTION
+  ============================================================= -->
+  <section class="game-section steam-section" id="steam-section">
+    <!-- Background -->
+    <div class="section-bg steam-bg-wrap">
+      <div class="steam-grid-bg"></div>
+      <div class="bg-overlay steam-overlay"></div>
+    </div>
+
+    <div class="section-container">
+      <!-- Section Header -->
+      <div class="section-header reveal">
+        <div class="game-logo-wrap">
+          <div class="steam-logo-box">
+            <i class="fa-brands fa-steam" style="font-size:2.5rem;color:#66c0f4"></i>
+          </div>
+          <div>
+            <div class="section-eyebrow">VALVE</div>
+            <h2 class="section-title steam-title">Steam Library</h2>
+          </div>
+        </div>
+        <div class="account-badge steam-badge">
+          <i class="fa-brands fa-steam"></i>
+          <span id="steam-account-name">LấyĐứcPhụcNhân</span>
+        </div>
+      </div>
+
+      <!-- Steam Stats Bar -->
+      <div class="steam-stats-bar reveal">
+        <div class="steam-stat-block">
+          <div class="steam-stat-icon"><i class="fa-solid fa-clock"></i></div>
+          <div class="steam-stat-number counter-anim" data-target="1200">0</div>
+          <div class="steam-stat-label">Tổng giờ chơi</div>
+        </div>
+        <div class="steam-stat-block">
+          <div class="steam-stat-icon"><i class="fa-solid fa-gamepad"></i></div>
+          <div class="steam-stat-number counter-anim" data-target="45">0</div>
+          <div class="steam-stat-label">Games sở hữu</div>
+        </div>
+        <div class="steam-stat-block">
+          <div class="steam-stat-icon"><i class="fa-solid fa-trophy"></i></div>
+          <div class="steam-stat-number counter-anim" data-target="320">0</div>
+          <div class="steam-stat-label">Achievements</div>
+        </div>
+        <div class="steam-stat-block">
+          <div class="steam-stat-icon"><i class="fa-solid fa-star"></i></div>
+          <div class="steam-stat-number counter-anim" data-target="12">0</div>
+          <div class="steam-stat-label">Reviews viết</div>
+        </div>
+      </div>
+
+      <!-- Games Grid -->
+      <div class="games-grid-wrapper">
+        <h3 class="panel-title reveal">
+          <i class="fa-solid fa-fire" style="color:#66c0f4"></i>
+          Most Played Games
+        </h3>
+        <div class="games-grid" id="steam-games-grid">
+
+          <!-- Cyberpunk 2077 -->
+          <div class="game-card steam-card reveal" data-hours="200">
+            <div class="game-card-img-wrap">
+              <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg" alt="Cyberpunk 2077" class="game-card-img" />
+              <div class="game-card-overlay">
+                <span class="game-play-tag"><i class="fa-solid fa-star"></i> Most Played</span>
+              </div>
+            </div>
+            <div class="game-card-info">
+              <div class="game-card-name">Cyberpunk 2077</div>
+              <div class="game-card-hours"><i class="fa-solid fa-clock"></i> 200 giờ</div>
+              <div class="game-card-genre"><i class="fa-solid fa-tag"></i> RPG · Open World</div>
+              <div class="game-hours-bar">
+                <div class="game-hours-fill" style="width:100%"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Elden Ring -->
+          <div class="game-card steam-card reveal" data-hours="150">
+            <div class="game-card-img-wrap">
+              <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg" alt="Elden Ring" class="game-card-img" />
+              <div class="game-card-overlay"></div>
+            </div>
+            <div class="game-card-info">
+              <div class="game-card-name">Elden Ring</div>
+              <div class="game-card-hours"><i class="fa-solid fa-clock"></i> 150 giờ</div>
+              <div class="game-card-genre"><i class="fa-solid fa-tag"></i> Souls-like · Action RPG</div>
+              <div class="game-hours-bar">
+                <div class="game-hours-fill" style="width:75%"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sekiro: Shadows Die Twice -->
+          <div class="game-card steam-card reveal" data-hours="120">
+            <div class="game-card-img-wrap">
+              <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/814380/header.jpg" alt="Sekiro: Shadows Die Twice" class="game-card-img" />
+              <div class="game-card-overlay"></div>
+            </div>
+            <div class="game-card-info">
+              <div class="game-card-name">Sekiro: Shadows Die Twice</div>
+              <div class="game-card-hours"><i class="fa-solid fa-clock"></i> 120 giờ</div>
+              <div class="game-card-genre"><i class="fa-solid fa-tag"></i> Souls-like · Stealth</div>
+              <div class="game-hours-bar">
+                <div class="game-hours-fill" style="width:60%"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- It Takes Two -->
+          <div class="game-card steam-card reveal" data-hours="15">
+            <div class="game-card-img-wrap">
+              <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1426210/header.jpg" alt="It Takes Two" class="game-card-img" />
+              <div class="game-card-overlay">
+                <span class="game-play-tag coop-tag">
+                  <i class="fa-solid fa-heart"></i> Co-op
+                </span>
+              </div>
+            </div>
+            <div class="game-card-info">
+              <div class="game-card-name">It Takes Two</div>
+              <div class="game-card-hours"><i class="fa-solid fa-clock"></i> 15 giờ</div>
+              <div class="game-card-genre"><i class="fa-solid fa-tag"></i> Co-op · Adventure</div>
+              <div class="game-hours-bar">
+                <div class="game-hours-fill" style="width:7.5%"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- A Way Out -->
+          <div class="game-card steam-card reveal" data-hours="10">
+            <div class="game-card-img-wrap">
+              <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1222700/header.jpg" alt="A Way Out" class="game-card-img" />
+              <div class="game-card-overlay">
+                <span class="game-play-tag coop-tag">
+                  <i class="fa-solid fa-heart"></i> Co-op
+                </span>
+              </div>
+            </div>
+            <div class="game-card-info">
+              <div class="game-card-name">A Way Out</div>
+              <div class="game-card-hours"><i class="fa-solid fa-clock"></i> 10 giờ</div>
+              <div class="game-card-genre"><i class="fa-solid fa-tag"></i> Co-op · Action</div>
+              <div class="game-hours-bar">
+                <div class="game-hours-fill" style="width:5%"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Black Myth: Wukong -->
+          <div class="game-card steam-card reveal" data-hours="100">
+            <div class="game-card-img-wrap">
+              <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2358720/header.jpg" alt="Black Myth: Wukong" class="game-card-img" />
+              <div class="game-card-overlay">
+                <span class="game-play-tag hot-tag">
+                  <i class="fa-solid fa-fire"></i> Hot Pick
+                </span>
+              </div>
+            </div>
+            <div class="game-card-info">
+              <div class="game-card-name">Black Myth: Wukong</div>
+              <div class="game-card-hours"><i class="fa-solid fa-clock"></i> 100 giờ</div>
+              <div class="game-card-genre"><i class="fa-solid fa-tag"></i> Action RPG · Mythology</div>
+              <div class="game-hours-bar">
+                <div class="game-hours-fill" style="width:50%"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Monster Hunter: World -->
+          <div class="game-card steam-card reveal" data-hours="90">
+            <div class="game-card-img-wrap">
+              <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/582010/header.jpg" alt="Monster Hunter: World" class="game-card-img" />
+              <div class="game-card-overlay"></div>
+            </div>
+            <div class="game-card-info">
+              <div class="game-card-name">Monster Hunter: World</div>
+              <div class="game-card-hours"><i class="fa-solid fa-clock"></i> 90 giờ</div>
+              <div class="game-card-genre"><i class="fa-solid fa-tag"></i> Action · Hunt</div>
+              <div class="game-hours-bar">
+                <div class="game-hours-fill" style="width:45%"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ARK: Survival Evolved -->
+          <div class="game-card steam-card reveal" data-hours="80">
+            <div class="game-card-img-wrap">
+              <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/346110/header.jpg" alt="ARK: Survival Evolved" class="game-card-img" />
+              <div class="game-card-overlay"></div>
+            </div>
+            <div class="game-card-info">
+              <div class="game-card-name">ARK: Survival Evolved</div>
+              <div class="game-card-hours"><i class="fa-solid fa-clock"></i> 80 giờ</div>
+              <div class="game-card-genre"><i class="fa-solid fa-tag"></i> Survival · Dinosaur</div>
+              <div class="game-hours-bar">
+                <div class="game-hours-fill" style="width:40%"></div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================= -->
+  <footer class="game-footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <span class="footer-logo">⚔</span>
+        <span class="footer-name">Tuan · GAMING PROFILE</span>
+      </div>
+      <p class="footer-note">GG WP · Các số liệu chỉ mang tính tượng trưng, cập nhật thường xuyên.</p>
+      <p class="footer-copy">© 2024 · Tuan · All rights reserved</p>
+    </div>
+  </footer>
+
+  <script src="game.js"></script>
+</body>
+
+</html>
